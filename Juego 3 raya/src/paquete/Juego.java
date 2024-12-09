@@ -7,7 +7,8 @@ public class Juego {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		
+		
 		Scanner scanner = new Scanner(System.in);
 		Random random = new Random();
 		
@@ -30,9 +31,10 @@ public class Juego {
 		String matriz[][] = {{"·","·","·"},
 							 {"·","·","·"},
 							 {"·","·","·"},};
-				
-		boolean continuar = true;
 		
+		boolean continuar = true;
+		int turno = numAleatorio; // Empieza el jugador aleatorio
+
 		while(continuar) {
 			System.out.println("Estos son las posiciones disponibles: \n");
 			for (int i = 0; i < matriz.length; i++) {	// primer for recorre las filas	
@@ -41,12 +43,15 @@ public class Juego {
 			     }
 			       System.out.println("");
 			}
+			
+			String ficha = (turno % 2 == 0) ? "x" : "o";
+			System.out.println("\nEs el turno de " + nombreJugador[turno % 2] + " (" + ficha + ")");
 						
 		    System.out.println("\nQue numero de fila quiere? ");
   			int numFila = scanner.nextInt();
   			System.out.println(""+ numFila);
   			
-  			if(numFila < 0 || numFila > 6) {
+  			if(numFila < 0 || numFila > 2) {
 	  			System.out.println("Error: Fila no valida.");
 	  			continue;
 	  		}
@@ -55,17 +60,67 @@ public class Juego {
   			int numColumna = scanner.nextInt();			
   			System.out.println(""+ numColumna);
 	  		
-	  		if(numColumna < 0 || numColumna > 6) {
+	  		if(numColumna < 0 || numColumna > 2) {
 	  			System.out.println("Error: Columna no valida.");
 	  			continue;
 	  		}
 	  			
-	  		if(matriz[numFila][numColumna].equals("x")) {
+	  		if(matriz[numFila][numColumna].equals("x") || matriz[numFila][numColumna].equals("o")) {
 	  			System.out.println("Esta posicion esta ocupada. Elije otra. Gracias.");
 	  		}else {
-	  			matriz[numFila][numColumna] = "x";
+	  			matriz[numFila][numColumna] = ficha;
 	  		}	  		
-  			  				
+  			            
+            if((matriz[0][0] == "x") && (matriz[0][1] == "x") && (matriz[0][2] == "x") || 
+               (matriz[0][0] == "o") && (matriz[0][1] == "o") && (matriz[0][2] == "o") ) {
+            	System.out.println("Ganaste");
+            	continuar = false;
+            }
+            
+            if((matriz[1][0] == "x") && (matriz[1][1] == "x") && (matriz[1][2] == "x") || 
+               (matriz[1][0] == "o") && (matriz[1][1] == "o") && (matriz[1][2] == "o") ) {
+               System.out.println("Ganaste");
+               continuar = false;
+            }
+            
+            if((matriz[2][0] == "x") && (matriz[2][1] == "x") && (matriz[2][2] == "x") || 
+               (matriz[2][0] == "o") && (matriz[2][1] == "o") && (matriz[2][2] == "o") ) {
+               System.out.println("Ganaste");
+               continuar = false;
+               
+            }
+            if((matriz[0][0]== "x") && (matriz[1][0]== "x") && (matriz[2][0]== "x") || 
+               (matriz[0][0]== "o") && (matriz[1][0]== "o") && (matriz[2][0]== "o")){
+               System.out.println("Ganaste");
+               continuar = false;
+               
+            }
+            if((matriz[0][1]== "x") && (matriz[1][1]== "x") && (matriz[2][1]== "x") ||
+               (matriz[0][1]== "o") && (matriz[1][1]== "o") && (matriz[2][1]== "o")	){
+               System.out.println("Ganaste");
+               continuar = false;
+               
+            }
+            if((matriz[0][2]== "x") && (matriz[1][2]== "x") && (matriz[2][2]== "x") ||
+               (matriz[0][2]== "o") && (matriz[1][2]== "o") && (matriz[2][2]== "o")){
+               System.out.println("Ganaste");
+               continuar = false;
+               
+            }
+            if((matriz[0][0]== "x") && (matriz[1][1]== "x") && (matriz[2][2]== "x") ||
+               (matriz[0][0]== "o") && (matriz[1][1]== "o") && (matriz[2][2]== "o")){
+               System.out.println("Ganaste");
+               continuar = false;
+               
+            }
+            if((matriz[0][2]== "x") && (matriz[1][1]== "x") && (matriz[2][0]== "x") || 
+               (matriz[0][2]== "o") && (matriz[1][1]== "o") && (matriz[2][0]== "o")){
+	           System.out.println("Ganaste");
+	           continuar = false;
+            }
+            
+            turno++;
+
 		}
 	  	 	for (int i = 0; i < matriz.length; i++) {	// primer for recorre las filas	
 			     for (int j = 0; j < matriz[i].length; j++) { // el segundo recorre las columnas
@@ -73,8 +128,7 @@ public class Juego {
 			     }
 			       System.out.println("");
 	  	 	}
-		
-		
+		 
 	}
 
 }
